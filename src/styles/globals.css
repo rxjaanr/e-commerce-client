@@ -1,27 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+html {
+  font-family: "Inter", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.nav-dashboard-active {
+  @apply before:px-10 before:-translate-y-8 before:bg-white before:absolute before:h-[150%] before:-z-[1] before:rounded-t-lg before:py-24 text-sky-500 before:border before:shadow-md before:border-slate-300 md:before:p-0 md:before:translate-y-0 md:before:py-0 md:before:h-full md:before:left-0 md:before:w-full md:before:rounded-none md:text-slate-800;
 }

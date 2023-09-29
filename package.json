@@ -9,19 +9,28 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "@types/bcrypt": "^5.0.0",
+    "@types/md5": "^2.3.2",
+    "axios": "^1.5.1",
+    "bcrypt": "^5.1.1",
+    "clsx": "^2.0.0",
+    "md5": "^2.3.0",
+    "mongoose": "^7.5.3",
+    "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "next": "latest"
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "@types/react": "latest",
     "@types/node": "latest",
+    "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest"
+    "typescript": "latest"
   }
 }
