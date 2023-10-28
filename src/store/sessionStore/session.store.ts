@@ -25,7 +25,7 @@ const useSessionStore = create<iSessionStore>()(
     }),
     {
       name: "session-store",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

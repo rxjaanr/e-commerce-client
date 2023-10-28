@@ -2,8 +2,7 @@ import Button from "@/components/buttons/button";
 import FormControl from "@/components/formControl/form.control";
 import { useEffect, useState, ReactNode } from "react";
 import Link from "next/link";
-import useAuthDataStore from "@/store/dataStore/userdata.store";
-import useValidationStore from "@/store/validationStore/validations.store";
+
 import { registerHandler } from "@/libs/axios/config/api.config";
 import Modal from "@/components/modals/modal";
 import { shallow } from "zustand/shallow";
@@ -11,26 +10,6 @@ import { useRouter } from "next/router";
 import useSessionStore from "@/store/sessionStore/session.store";
 
 export default function RegisterPage() {
-  const [authData, setData, removeAllData] = useAuthDataStore(
-    (state) => [state.authData, state.setData, state.removeAllData],
-    shallow
-  );
-
-  const [validations, setValidations, removeAllValidations] =
-    useValidationStore(
-      (state) => [
-        state.validations,
-        state.setValidations,
-        state.removeAllValidations,
-      ],
-      shallow
-    );
-
-  const [isOpen, setisOpen] = useState<boolean>(false);
-
-  const router = useRouter();
-  const sessionData = useSessionStore((state) => state.sessionData);
-
   interface iForm {
     placeholder: string;
     name: string;
@@ -38,44 +17,60 @@ export default function RegisterPage() {
     value: string | undefined;
   }
 
+  interface iData {
+    name: string;
+    address: string;
+    email: string;
+    password: string;
+    bank_account: string;
+  }
+
+  const [formData, setformData] = useState<iData>({
+    name: "",
+    address: "",
+    email: "",
+    password: "",
+    bank_account: "",
+  });
+
+  const [validations, setvalidations] = useState<{} | any>({});
+  const [isOpen, setisOpen] = useState<boolean>(false);
+  const [loading, setloading] = useState<boolean>(false);
+
+  const router = useRouter();
+
   const formList: Array<iForm> = [
     {
       placeholder: "Name",
       name: "name",
       inputType: "text",
-      value: authData.name || "",
+      value: formData.name || "",
     },
     {
       placeholder: "Address",
       name: "address",
       inputType: "text",
-      value: authData.address || "",
+      value: formData.address || "",
     },
     {
       placeholder: "Email",
       name: "email",
       inputType: "email",
-      value: authData.email || "",
+      value: formData.email || "",
     },
     {
       placeholder: "Password",
       name: "password",
       inputType: "password",
-      value: authData.password || "",
+      value: formData.password || "",
     },
     {
       placeholder: "Bank Account (optional)",
       name: "bank_account",
       inputType: "text",
-      value: authData.bank_account || "",
+      value: formData.bank_account || "",
     },
   ];
-
-  useEffect(() => {
-    if (sessionData.login_tokens !== "") {
-      router.push("/404");
-    }
-  }, [sessionData]);
 
   return (
     <main>
@@ -86,8 +81,6 @@ export default function RegisterPage() {
         isOpen={isOpen}
         onclick={() => {
           setisOpen(false);
-          removeAllData();
-          removeAllValidations();
           router.push("/auth/login");
         }}
       />
@@ -105,17 +98,16 @@ export default function RegisterPage() {
             </div>
 
             <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setvalidations({});
+                setloading(true);
+                registerHandler(formData)
+                  .then((res) => console.log(res))
+                  .catch((err) => setvalidations(err.response.data))
+                  .finally(() => setloading(false));
+              }}
               className="mt-8"
-              onSubmit={
-                registerHandler(authData, async (err: any, res: any) => {
-                  if (err) {
-                    setValidations(err?.response?.data);
-                  }
-                  if (res) {
-                    setisOpen(true);
-                  }
-                }) as any
-              }
             >
               {formList.map((list, i): ReactNode => {
                 return (
@@ -126,7 +118,7 @@ export default function RegisterPage() {
                       name={list?.name}
                       value={list?.value}
                       onChange={(e) =>
-                        setData((prevData: any) => ({
+                        setformData((prevData: any) => ({
                           ...prevData,
                           [list.name]: e.target.value,
                         }))
@@ -142,23 +134,17 @@ export default function RegisterPage() {
                 );
               })}
               <Button
+                disabled={loading}
                 fullWidth={true}
                 type={"submit"}
-                className="mt-8 shadow-md bg-[#6dc8c2] text-white font-semibold hover:rounded-full px-8 py-4"
+                className="mt-8 shadow-md disabled:bg-slate-500 bg-[#6dc8c2] text-white font-semibold hover:rounded-full px-8 py-4"
               >
-                Sign Up
+                {loading ? "..." : "Sign Up"}
               </Button>
             </form>
             <span className="mt-8 ">
               Already have an account?{" "}
-              <Link
-                className="text-[#6dc8c2]"
-                href={"/auth/login"}
-                onClick={() => {
-                  removeAllData();
-                  removeAllValidations();
-                }}
-              >
+              <Link className="text-[#6dc8c2]" href={"/auth/login"}>
                 Sign In
               </Link>
             </span>

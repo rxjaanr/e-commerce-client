@@ -1,61 +1,47 @@
 import Button from "@/components/buttons/button";
 import FormControl from "@/components/formControl/form.control";
 import { loginHandler } from "@/libs/axios/config/api.config";
-import connectMongoDB from "@/libs/mongoose/config/db.config";
-import useAuthDataStore from "@/store/dataStore/userdata.store";
 import useSessionStore from "@/store/sessionStore/session.store";
-import useValidationStore from "@/store/validationStore/validations.store";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { shallow } from "zustand/shallow";
 
 export default function LoginPage() {
-  const router = useRouter();
-  const [authData, setAuthData, removeAllData] = useAuthDataStore(
-    (state) => [state.authData, state.setData, state.removeAllData],
-    shallow
-  );
+  interface iData {
+    email: string;
+    password: string;
+  }
+  const [formData, setformData] = useState<iData>({
+    email: "",
+    password: "",
+  });
+  const [validations, setvalidations] = useState<{} | any>({});
+  const [loading, setloading] = useState<boolean>(false);
   const [sessionData, setSessionData] = useSessionStore(
     (state) => [state.sessionData, state.setSessionData],
     shallow
   );
-  const [validations, setValidations, removeAllValidations] =
-    useValidationStore(
-      (state) => [
-        state.validations,
-        state.setValidations,
-        state.removeAllValidations,
-      ],
-      shallow
-    );
 
   const formList: Array<{
     placeholder: string;
     name: string;
     inputType: "text" | "email" | "password";
-    value: string | undefined;
+    value?: string | undefined;
   }> = [
     {
       name: "email",
       placeholder: "Email",
       inputType: "email",
-      value: authData.email || "",
+      value: formData.email || "",
     },
     {
       name: "password",
       placeholder: "Password",
       inputType: "password",
-      value: authData.password || "",
+      value: formData.password || "",
     },
   ];
-
-  useEffect(() => {
-    if (sessionData.login_tokens !== "") {
-      router.push("/dashboard");
-    }
-    console.log(process.env);
-  }, [sessionData]);
 
   return (
     <main>
@@ -67,24 +53,23 @@ export default function LoginPage() {
               <p className="mt-2">Sign in with your account</p>
             </div>
             <form
-              onSubmit={
-                loginHandler(authData, (err: any, res: any) => {
-                  removeAllValidations();
-                  if (err) {
-                    setValidations(err?.response?.data);
-                  }
-                  if (res) {
-                    setSessionData(res?.data?.data);
-                    removeAllValidations();
-                    removeAllData();
-                    router.push("/dashboard/");
-                  }
-                }) as any
-              }
+              onSubmit={(e) => {
+                e.preventDefault();
+                setvalidations({});
+                setloading(true);
+                loginHandler(formData)
+                  .then((res: any) => {
+                    setSessionData(res.data.data);
+                  })
+                  .catch((err) => {
+                    setvalidations(err.response.data);
+                  })
+                  .finally(() => setloading(false));
+              }}
               className="mt-6"
             >
               {validations["message"] && (
-                <div className="bg-[rgba(255,129,129,0.78)] px-4 py-2 text-white rounded border border-red-700">
+                <div className="bg-[rgba(245,91,91,0.6)] px-6 py-4 text-white rounded shadow-md">
                   {validations["message"]}
                 </div>
               )}
@@ -97,9 +82,9 @@ export default function LoginPage() {
                       placeholder={list.placeholder}
                       value={list.value}
                       onChange={(e) =>
-                        setAuthData((prevState: typeof authData) => ({
+                        setformData((prevState: typeof formData) => ({
                           ...prevState,
-                          [list.name as any]: e.target.value,
+                          [list.name]: e.target.value,
                         }))
                       }
                       className="focus:outline-slate-400"
@@ -113,24 +98,17 @@ export default function LoginPage() {
                 );
               })}
               <Button
+                disabled={loading}
                 fullWidth={true}
-                className="bg-white px-6 py-4 hover:shadow-md hover:rounded-full mt-8"
+                className="bg-white disabled:bg-slate-200 disabled:text-slate-400 px-6 py-4 hover:shadow-md hover:rounded-full mt-8"
               >
-                Sign In
+                {loading ? "..." : "Sign In"}
               </Button>
             </form>
 
             <span className="mt-8">
               Don't have an account?{" "}
-              <Link
-                className="text-white font-medium"
-                href={"/auth/register"}
-                onClick={() => {
-                  removeAllData();
-
-                  removeAllValidations();
-                }}
-              >
+              <Link className="text-white font-medium" href={"/auth/register"}>
                 Register Now
               </Link>{" "}
             </span>
