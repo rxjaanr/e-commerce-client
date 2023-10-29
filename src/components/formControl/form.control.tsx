@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 type PropsType = {
   name: string;
-  inputType: "text" | "password" | "email";
+  inputType?: "text" | "password" | "email";
   onChange?: (e?: any) => void;
   value?: string | any;
   placeholder: string;
