@@ -7,7 +7,7 @@ type PropsType = {
   cols?: number;
   row?: number;
   className?: string;
-  onChange?: () => any;
+  onChange?: (e: any) => any;
 };
 export default function TextArea(props: PropsType) {
   return (
