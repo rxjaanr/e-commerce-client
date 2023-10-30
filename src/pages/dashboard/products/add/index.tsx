@@ -56,6 +56,7 @@ export default function Add() {
 
   return (
     <main>
+      <Sidebar />
       <Modal isOpen={isOpen}>
         <div className="flex flex-col">
           <label className="px-6 py-3 bg-slate-200 border border-slate-300 w-full">
@@ -64,7 +65,7 @@ export default function Add() {
           <UploadDropzone<typeFileRouter> endpoint="imageUploader" />
         </div>
       </Modal>
-      <div className="py-24 px-8 md:px-12 lg:px-16 ">
+      <div className="pt-36 md:pt-40 pb-32 px-8 md:px-12 lg:px-16 ">
         {/* IF Sidebar Was Created  add class lg:pl-64 */}
         <h1 className="text-3xl md:text-4xl font-semibold">Add Products</h1>
         <p>Add Product To Your Shop</p>
@@ -73,7 +74,7 @@ export default function Add() {
           onSubmit={(e: any) => {
             e.preventDefault();
           }}
-          className=" flex mt-16 flex-wrap gap-4 w-full"
+          className=" flex mt-12 flex-wrap gap-4 w-full"
         >
           <div className="flex flex-col gap-4 w-full lg:w-1/2">
             <FormControl
