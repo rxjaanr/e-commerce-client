@@ -17,11 +17,10 @@ export default function Select(props: PropsType) {
         value={props.value}
         onChange={props.onChange}
         className={clsx(
-          "px-6 py-4 bg-slate-50 border border-slate-200 rounded-md",
+          "px-6 py-4 bg-white border border-slate-200 ",
           props.className
         )}
       >
-        <option disabled>Categories</option>
         {props.children}
       </select>
     </>

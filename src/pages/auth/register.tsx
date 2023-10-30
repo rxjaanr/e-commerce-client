@@ -75,15 +75,6 @@ export default function RegisterPage() {
   return (
     <main>
       {/* Modal */}
-      <Modal
-        message={"Register Success"}
-        subMessage={"Let's explore our product"}
-        isOpen={isOpen}
-        onclick={() => {
-          setisOpen(false);
-          router.push("/auth/login");
-        }}
-      />
 
       {/* Model End */}
       <div className="flex">
