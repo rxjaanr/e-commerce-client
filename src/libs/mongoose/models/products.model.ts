@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema(
       minLength: [10, "Description Too Short"],
     },
     price: {
-      type: String,
+      type: Number,
       required: true,
     },
     stock: {
@@ -35,7 +35,7 @@ const productSchema = new mongoose.Schema(
     },
     url: {
       type: String,
-      required: true,
+      default: null,
     },
   },
   {
