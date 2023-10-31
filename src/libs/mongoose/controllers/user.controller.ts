@@ -8,11 +8,6 @@ const userController: {
   register: (req: NextApiRequest, res: NextApiResponse) => any;
 } = {
   login: async (req, res) => {
-    if (req.method !== "POST") {
-      return res
-        .status(400)
-        .json({ message: req.method + " Is Not Supported" });
-    }
     const { email, password } = req.body;
 
     try {
@@ -67,11 +62,6 @@ const userController: {
   },
 
   register: async (req, res) => {
-    if (req.method !== "POST") {
-      return res
-        .status(400)
-        .json({ message: req.method + " Is Not Supported" });
-    }
     const { name, email, password, address } = req.body;
     interface iData {
       name: string;

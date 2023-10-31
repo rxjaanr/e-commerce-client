@@ -20,7 +20,7 @@ export default function Modal(props: PropsType) {
         ></div>
         <div
           className={clsx(
-            "absolute md:min-w-[30rem]  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 shadow-lg rounded-md",
+            "fixed md:min-w-[30rem]  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 shadow-lg rounded-md",
             props.className
           )}
         >

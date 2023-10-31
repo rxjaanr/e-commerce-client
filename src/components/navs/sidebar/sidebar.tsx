@@ -82,7 +82,7 @@ export default function Sidebar() {
       {/* Side */}
       <nav
         className={clsx(
-          "fixed top-0 bottom-0 left-0 py-10 bg-gradient-to-b from-gray-900 to-gray-700 text-white flex flex-col duration-300 ease-in-out rounded-r-md z-[999]",
+          "fixed top-0 bottom-0 left-0 py-10 bg-gradient-to-b from-gray-900 to-gray-700 text-white flex flex-col duration-300 ease-in-out rounded-r-md z-[999] shadow-2xl",
           !isOpen && "-translate-x-full"
         )}
       >
