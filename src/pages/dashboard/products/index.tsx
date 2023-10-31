@@ -62,11 +62,7 @@ export default function Index() {
                         </td>
                         <td className="max-md:hidden">{product.stock}</td>
                         <td className="max-md:hidden md:flex justify-center">
-                          <img
-                            src={product.url}
-                            alt={product.name}
-                            className="w-12"
-                          />
+                          <img src={product.url} className="w-12" />
                         </td>
                         <td>
                           <div className="flex gap-4 max-md:gap-2 justify-center">

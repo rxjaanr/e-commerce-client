@@ -232,8 +232,12 @@ export default function Add() {
                 setloading(true);
                 setvalidations({});
                 addProductHandler(formData, loginTokens)
-                  .then((res) => {
-                    setisOpen((s) => !s);
+                  .then((res: any) => {
+                    setisOpen(true);
+                    setFormData((prevState) => ({
+                      ...prevState,
+                      ["id"]: res.data.message._id,
+                    }));
                   })
                   .catch((err) => {
                     setvalidations(err.response.data.message.errors);

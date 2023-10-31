@@ -38,7 +38,7 @@ const productsController: {
       const products = await new Products(data).save();
       if (products) {
         res.status(200).json({
-          message: "Product Has Added",
+          message: products,
         });
       }
     } catch (error) {
@@ -58,18 +58,14 @@ const productsController: {
           message: "Unauthorized",
         });
       }
-      const { name, description, category, price, stock, url } = req.body;
-      const data: Data = {
-        name: name,
-        description: description,
-        category: category,
-        price: price,
-        stock: stock,
-      };
+      const { id, url } = req.body;
 
-      const products = await Products.findOneAndUpdate(data, {
-        url: url,
-      });
+      const products = await Products.findOneAndUpdate(
+        { _id: id },
+        {
+          url: url,
+        }
+      );
       if (products) {
         return res.status(200).json({
           message: "Product Updated",
