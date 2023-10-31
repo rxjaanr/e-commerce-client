@@ -22,7 +22,6 @@ export default function Add() {
   const [isOpen, setisOpen] = useState<boolean>(false);
   const [loading, setloading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
-  const [submitted, setSubmitted] = useState<boolean>(false);
   const [validations, setvalidations] = useState<any>({});
   const categories = [
     {
@@ -39,12 +38,13 @@ export default function Add() {
     },
   ];
   interface iForm {
+    id?: string;
     name: string;
     description: string;
     category: string;
     price: string;
     stock: string;
-    url: string;
+    url?: string;
   }
   const [formData, setFormData] = useState<iForm>({
     name: "",
@@ -52,7 +52,6 @@ export default function Add() {
     category: "Laptop",
     price: "",
     stock: "",
-    url: "",
   });
 
   useEffect(() => {
@@ -67,7 +66,7 @@ export default function Add() {
   }, [formData, isOpen]);
 
   useEffect(() => {
-    if (formData.url !== "" && submitted === true) {
+    if (formData.url !== "" && success !== true) {
       (() => {
         updateProductHandler(formData, loginTokens)
           .then((res) => {
@@ -78,7 +77,6 @@ export default function Add() {
           })
           .finally(() => {
             setloading(false);
-            setSubmitted(false);
           });
       })();
     }
@@ -227,6 +225,7 @@ export default function Add() {
               )}
             </div>
             <Button
+              disabled={loading}
               fullWidth={true}
               className="border border-slate-300 py-5 mt-8 bg-sky-500 text-white font-medium"
               onclick={() => {
@@ -235,7 +234,6 @@ export default function Add() {
                 addProductHandler(formData, loginTokens)
                   .then((res) => {
                     setisOpen((s) => !s);
-                    setSubmitted(true);
                   })
                   .catch((err) => {
                     setvalidations(err.response.data.message.errors);

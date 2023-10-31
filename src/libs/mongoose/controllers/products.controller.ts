@@ -91,7 +91,7 @@ const productsController: {
         });
       }
       const products = await Products.find();
-      if (!products) {
+      if (products.length === 0) {
         return res.status(400).json({
           message: "Product Not Found",
         });

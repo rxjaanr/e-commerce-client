@@ -8,6 +8,12 @@ html {
   font-family: "Inter", sans-serif;
 }
 
-.nav-dashboard-active {
-  @apply before:px-10 before:-translate-y-8 before:bg-white before:absolute before:h-[150%] before:-z-[1] before:rounded-t-lg before:py-24 text-sky-500 before:border before:shadow-md before:border-slate-300 md:before:p-0 md:before:translate-y-0 md:before:py-0 md:before:h-full md:before:left-0 md:before:w-full md:before:rounded-none md:text-slate-800;
+th {
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 1rem 0;
+}
+
+td {
+  padding: 1rem 0;
 }
