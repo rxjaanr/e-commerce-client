@@ -12,9 +12,7 @@ export default async function handler(
     case "POST":
       productsController.addProduct(req, res);
       break;
-    case "PUT":
-      productsController.updateProduct(req, res);
-      break;
+
     default:
       return res.status(404).json({
         message: req.method + "Is Not Supported",

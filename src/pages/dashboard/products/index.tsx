@@ -13,7 +13,7 @@ export default function Index() {
 
   useEffect(() => {
     (() => {
-      getAllProductHandler(loginTokens)
+      getAllProductHandler({ token: loginTokens })
         .then((res: any) => {
           setproducts(res.data.data);
         })
@@ -43,7 +43,7 @@ export default function Index() {
                   <th>Name</th>
                   <th className="max-md:hidden">Price</th>
                   <th className="max-md:hidden">Stock</th>
-                  <th className="max-md:hidden">Image</th>
+                  <th className="max-lg:hidden">Image</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -61,7 +61,7 @@ export default function Index() {
                           })}
                         </td>
                         <td className="max-md:hidden">{product.stock}</td>
-                        <td className="max-md:hidden md:flex justify-center">
+                        <td className="max-lg:hidden lg:flex justify-center">
                           <img src={product.url} className="w-12" />
                         </td>
                         <td>

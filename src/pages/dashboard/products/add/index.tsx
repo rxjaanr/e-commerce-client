@@ -68,7 +68,11 @@ export default function Add() {
   useEffect(() => {
     if (formData.url !== "" && success !== true) {
       (() => {
-        updateProductHandler(formData, loginTokens)
+        updateProductHandler({
+          newData: formData,
+          token: loginTokens,
+          id: formData.id as string,
+        })
           .then((res) => {
             setSuccess(true);
           })
@@ -231,7 +235,7 @@ export default function Add() {
               onclick={() => {
                 setloading(true);
                 setvalidations({});
-                addProductHandler(formData, loginTokens)
+                addProductHandler({ newData: formData, token: loginTokens })
                   .then((res: any) => {
                     setisOpen(true);
                     setFormData((prevState) => ({

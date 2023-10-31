@@ -93,7 +93,7 @@ export default function RegisterPage() {
                 e.preventDefault();
                 setvalidations({});
                 setloading(true);
-                registerHandler(formData)
+                registerHandler({ newData: formData })
                   .then((res) => console.log(res))
                   .catch((err) => setvalidations(err.response.data))
                   .finally(() => setloading(false));

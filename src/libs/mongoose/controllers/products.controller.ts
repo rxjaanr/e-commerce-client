@@ -20,9 +20,9 @@ const productsController: {
     try {
       await connectMongoDB();
       const user = await Users.findOne({
-        login_tokens: req.query?.token,
+        login_tokens: req.headers.authorization,
       });
-      if (!user || !req.query.token) {
+      if (!user || !req.headers.authorization) {
         return res.status(401).json({
           message: "Unauthorized",
         });
@@ -51,21 +51,16 @@ const productsController: {
     try {
       await connectMongoDB();
       const user = await Users.findOne({
-        login_tokens: req.query?.token,
+        login_tokens: req.headers?.authorization,
       });
-      if (!user || !req.query.token) {
+      if (!user || !req.headers.authorization) {
         return res.status(401).json({
           message: "Unauthorized",
         });
       }
-      const { id, url } = req.body;
 
-      const products = await Products.findOneAndUpdate(
-        { _id: id },
-        {
-          url: url,
-        }
-      );
+      const { id } = req.query;
+      const products = await Products.findOneAndUpdate({ _id: id }, req.body);
       if (products) {
         return res.status(200).json({
           message: "Product Updated",
@@ -79,9 +74,9 @@ const productsController: {
     try {
       await connectMongoDB();
       const user = await Users.findOne({
-        login_tokens: req.query?.token,
+        login_tokens: req.headers.authorization,
       });
-      if (!user || !req.query.token) {
+      if (!user || !req.headers.authorization) {
         return res.status(401).json({
           message: "Unauthorized",
         });

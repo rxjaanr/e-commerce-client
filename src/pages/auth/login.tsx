@@ -57,7 +57,7 @@ export default function LoginPage() {
                 e.preventDefault();
                 setvalidations({});
                 setloading(true);
-                loginHandler(formData)
+                loginHandler({ newData: formData })
                   .then((res: any) => {
                     setSessionData(res.data.data);
                   })
