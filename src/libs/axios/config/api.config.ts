@@ -72,3 +72,16 @@ export const getAllProductHandler = ({ token }: { token: string }) => {
       .catch((err) => reject(err));
   });
 };
+
+export const deleteProduct = ({ id, token }: { id: string; token: string }) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .delete("/products/" + id, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+};

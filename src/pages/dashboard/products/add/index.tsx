@@ -13,6 +13,7 @@ import {
 } from "@/libs/axios/config/api.config";
 import useSessionStore from "@/store/sessionStore/session.store";
 import Link from "next/link";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 export default function Add() {
   const myForm = useRef<HTMLFormElement>(null);
@@ -95,10 +96,11 @@ export default function Add() {
           </div>
         ) : success ? (
           <div className="flex justify-center items-center p-10 flex-col">
+            <CheckCircleIcon className="w-28 text-green-400" />
             <span className="text-xl font-medium">Success Add Product!</span>
             <Link
               href={"/dashboard/products"}
-              className=" mt-12 px-6 py-4 bg-sky-600 border text-white border-slate-50 shadow-md rounded-md"
+              className="mt-6 px-6 py-4 bg-sky-600 border text-white border-slate-50 shadow-md rounded-md"
             >
               Back To Products
             </Link>

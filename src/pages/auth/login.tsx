@@ -22,6 +22,7 @@ export default function LoginPage() {
     (state) => [state.sessionData, state.setSessionData],
     shallow
   );
+  const router = useRouter();
 
   const formList: Array<{
     placeholder: string;
@@ -60,6 +61,7 @@ export default function LoginPage() {
                 loginHandler({ newData: formData })
                   .then((res: any) => {
                     setSessionData(res.data.data);
+                    router.push("/dashboard/");
                   })
                   .catch((err) => {
                     setvalidations(err.response.data);
