@@ -7,28 +7,31 @@ export default function SearchBox() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const input = useRef<HTMLInputElement>(null);
 
-  const handleKey = (e: KeyboardEvent) => {
-    if (e.key == "Escape" && isOpen) {
-      e.preventDefault();
-      setIsOpen(false);
-    }
-    if (e.key === "k" && e.ctrlKey) {
-      e.preventDefault();
-      setIsOpen(!isOpen);
-      input.current?.focus();
-    }
-  };
-
   useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key == "Escape" && isOpen) {
+        e.preventDefault();
+        setIsOpen(false);
+      }
+      if (e.key === "k" && e.ctrlKey) {
+        e.preventDefault();
+        setIsOpen(!isOpen);
+      }
+      if (isOpen) {
+        input.current?.focus();
+      }
+    };
     window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
+    return () => {
+      window.removeEventListener("keydown", handleKey);
+    };
   }, [isOpen]);
 
   return (
     <>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <div className="w-[90%] md:w-[55%] lg:w-[40%] p-2 bg-white rounded-md border border-slate-200 shadow flex flex-col z-[3]">
-          <div className="flex border border-slate-300 px-3 rounded-sm">
+        <div className="w-[90%] sm:w-[75%] md:w-[60%] lg:w-[50%] xl:w-[40%] p-2 bg-white rounded-md border border-slate-200 shadow flex flex-col z-[3]">
+          <div className="flex border border-slate-300 px-3 rounded-sm ">
             <MagnifyingGlassIcon className="w-6  mr-1" />
             <input
               ref={input}
@@ -39,9 +42,9 @@ export default function SearchBox() {
         </div>
       </Modal>
       <div
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(true)}
         className={clsx(
-          "rounded-full border border-slate-300 p-2 cursor-pointer"
+          "rounded-full border border-slate-300 p-2 cursor-pointer hover:bg-slate-50"
         )}
       >
         <MagnifyingGlassIcon className="w-6" />

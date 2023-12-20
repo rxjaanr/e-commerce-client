@@ -37,12 +37,14 @@ export default function Navbar({ auth }: { auth?: {} }) {
             }}
           />
           <div className="flex items-center">
-            <h1 className="font-bold uppercase py-3">rjstore.co</h1>
+            <h1 className="max-lg:hidden font-bold uppercase py-3">
+              rjstore.co
+            </h1>
             {/* Desktop Nav */}
             {/* End Desktop Nav */}
           </div>
           {/* Search Box, Cart , And Auth */}
-          <div className="flex gap-3 px-2">
+          <div className="flex gap-3 px-2 items-center">
             <SearchBox />
             <Profile />
           </div>
