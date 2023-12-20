@@ -1,0 +1,31 @@
+import clsx from "clsx";
+import { ReactNode } from "react";
+
+export default function Modal({
+  children,
+  isOpen,
+  onClose,
+}: {
+  children: ReactNode;
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  return (
+    <>
+      <div
+        className={clsx(
+          "fixed top-0 left-0 bottom-0 right-0 flex justify-center items-start pt-40",
+          !isOpen && "hidden"
+        )}
+      >
+        <div
+          className={clsx(
+            "fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.2)] z-[1]"
+          )}
+          onClick={onClose}
+        ></div>
+        {children}
+      </div>
+    </>
+  );
+}

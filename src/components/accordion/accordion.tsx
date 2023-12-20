@@ -20,7 +20,6 @@ export default function Accordion({
   children,
   toggleOn,
   animated,
-  withoutCaret,
   className,
 }: propsType) {
   const [isOpen, setIsOpen] = useState(opened);
@@ -39,8 +38,7 @@ export default function Accordion({
               "w-4 ml-2 text-slate-500",
               toggleOn == "click" && isOpen && "-rotate-180",
               toggleOn === "hover" && "group-hover:-rotate-180",
-              animated && "duration-200 ease-in-out",
-              withoutCaret && "hidden"
+              animated && "duration-200 ease-in-out"
             )}
           />
         </div>

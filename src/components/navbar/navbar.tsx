@@ -1,33 +1,26 @@
 "use client";
 
-import { Bars3Icon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  UserCircleIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 import Sidebar from "../sidebar/sidebar";
 import { useEffect, useState } from "react";
 
 import clsx from "clsx";
 import SearchBox from "../ui/searchbox/searchbox";
+import Profile from "../ui/profile/profile";
 
 export default function Navbar({ auth }: { auth?: {} }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    const resizeHandler = () => {
-      if (window.innerWidth > 1024) {
-        return setIsOpen(false);
-      }
-    };
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", resizeHandler);
-      return () => window.removeEventListener("resize", resizeHandler);
-    }
-  }, []);
 
   return (
     <>
       {/* layer */}
       <div
         className={clsx(
-          "fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.2)] z-[2]",
+          "lg:hidden fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.2)] z-[2]",
           !isOpen && "hidden"
         )}
         onClick={() => setIsOpen(false)}
@@ -51,6 +44,7 @@ export default function Navbar({ auth }: { auth?: {} }) {
           {/* Search Box, Cart , And Auth */}
           <div className="flex gap-3 px-2">
             <SearchBox />
+            <Profile />
           </div>
           {/*  */}
         </div>

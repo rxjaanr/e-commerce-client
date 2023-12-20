@@ -52,9 +52,12 @@ export default function Sidebar(props: {
         !props.isOpen && "-translate-x-full"
       )}
     >
-      <div className="flex w-full justify-between">
+      <div className="flex w-full justify-between items-center">
         <h1 className="font-bold text-[1.15rem] uppercase">rjstore.co</h1>
-        <XMarkIcon className="w-5 cursor-pointer" onClick={props.onClose} />
+        <XMarkIcon
+          className="w-8 cursor-pointer hover:bg-slate-100 rounded-full p-2"
+          onClick={props.onClose}
+        />
       </div>
       <div className="flex flex-col mt-10 gap-4">
         {navList.map((list, i) => {
