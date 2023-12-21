@@ -9,18 +9,27 @@ enum Role {
 }
 
 const schema = new mongoose.Schema({
-  name: {
+  firstName: {
     type: String,
-    required: [true, "Password is required"],
+    required: [true, "First Name is required"],
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    required: [true, "Last Name is required"],
+    trim: true,
   },
   email: {
     type: String,
     required: [true, "Email is required"],
+    unique: true,
+    trim: true,
   },
   password: {
     type: String,
     required: [true, "Password is required"],
-    minLength: 6,
+    minLength: [6, "Your Password Must Be longer"],
+    trim: true,
   },
   role: {
     type: String,

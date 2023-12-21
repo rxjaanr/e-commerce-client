@@ -14,13 +14,13 @@ export default function Modal({
     <>
       <div
         className={clsx(
-          "fixed top-0 left-0 bottom-0 right-0 flex justify-center items-start pt-40",
+          "fixed top-0 left-0 bottom-0 right-0 flex justify-center items-start pt-40 z-[2] backdrop-blur-[1px]",
           !isOpen && "hidden"
         )}
       >
         <div
           className={clsx(
-            "fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.2)] z-[1]"
+            "fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.2)] z-[3]"
           )}
           onClick={onClose}
         ></div>

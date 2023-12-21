@@ -9,22 +9,25 @@ export default function SearchBox() {
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key == "Escape" && isOpen) {
+      if (e.key == "Escape") {
         e.preventDefault();
         setIsOpen(false);
       }
       if (e.key === "k" && e.ctrlKey) {
         e.preventDefault();
-        setIsOpen(!isOpen);
-      }
-      if (isOpen) {
-        input.current?.focus();
+        setIsOpen((isOpen) => !isOpen);
       }
     };
     window.addEventListener("keydown", handleKey);
     return () => {
       window.removeEventListener("keydown", handleKey);
     };
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      input.current?.focus();
+    }
   }, [isOpen]);
 
   return (
@@ -44,10 +47,20 @@ export default function SearchBox() {
       <div
         onClick={() => setIsOpen(true)}
         className={clsx(
-          "rounded-full border border-slate-300 p-2 cursor-pointer hover:bg-slate-50"
+          "rounded-full flex items-center border border-slate-300 p-2 cursor-pointer hover:bg-slate-50"
         )}
       >
         <MagnifyingGlassIcon className="w-6" />
+        <h1 className="text-neutral-600 max-md:hidden mx-2 text-[0.9rem] mr-3">
+          Search...
+        </h1>
+        <div className="flex text-[0.8rem] mx-2 max-lg:hidden font-semibold text-neutral-500">
+          <span className="p-1 px-2 bg-slate-300 rounded-md shadow-md">
+            CTRL
+          </span>
+          <span className="p-1">+</span>
+          <span className="p-1 px-2 bg-slate-300 rounded-md shadow-md">K</span>
+        </div>
       </div>
     </>
   );

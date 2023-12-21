@@ -1,18 +1,14 @@
 "use client";
 
-import {
-  Bars3Icon,
-  UserCircleIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar from "../sidebar/sidebar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import clsx from "clsx";
 import SearchBox from "../ui/searchbox/searchbox";
 import Profile from "../ui/profile/profile";
 
-export default function Navbar({ auth }: { auth?: {} }) {
+export default function Navbar({ user }: { user?: {} }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -28,7 +24,7 @@ export default function Navbar({ auth }: { auth?: {} }) {
       {/* Mobile Nav */}
       <Sidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
       {/* End Mobile Nav */}
-      <nav className="fixed z-[1] flex justify-between top-0 right-0 left-0 px-4 md:px-8 py-4 bg-white border-b border-b-slate-300">
+      <nav className="fixed z-[1] flex justify-between top-0 right-0 left-0 px-4 md:px-8 lg:px-12 py-4 bg-white border-b border-b-slate-300">
         <div className="flex flex-grow justify-between items-center">
           <Bars3Icon
             className="w-12 lg:hidden cursor-pointer hover:bg-slate-100 rounded-full p-2"
