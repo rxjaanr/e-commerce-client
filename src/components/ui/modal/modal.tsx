@@ -3,19 +3,16 @@ import { ReactNode } from "react";
 
 export default function Modal({
   children,
-  isOpen,
   onClose,
 }: {
   children: ReactNode;
-  isOpen: boolean;
   onClose: () => void;
 }) {
   return (
     <>
       <div
         className={clsx(
-          "fixed top-0 left-0 bottom-0 right-0 flex justify-center items-start pt-40 z-[2] backdrop-blur-[1px]",
-          !isOpen && "hidden"
+          "fixed top-0 left-0 bottom-0 right-0 flex justify-center items-start pt-40 z-[2] backdrop-blur-[1px]"
         )}
       >
         <div
