@@ -16,9 +16,10 @@ export default function Dropdown({
       {items && (
         <div className="absolute hidden px-5 py-4 pb-5 min-w-[12rem] rounded-md border border-slate-200 bg-white group-hover:flex flex-col">
           {items.length > 0 &&
-            items?.map((item) => {
+            items?.map((item, i) => {
               return (
                 <Link
+                  key={i}
                   className="text-neutral-700 flex items-center hover:text-black py-[0.35rem]"
                   to={item.link}
                 >

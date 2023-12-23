@@ -1,12 +1,17 @@
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { authHandler } from "../../../utils/requests/auth/auth";
+import useSession from "../../../utils/hooks/useSession";
+import { toast } from "sonner";
 
 export default function Profile({ user }: { user?: any }) {
   const [isOpen, setisOpen] = useState<boolean>(false);
   const icon = useRef<HTMLDivElement>(null);
   const box = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const { deleteSession } = useSession();
   const clickHandler = (e: Event) => {
     if (
       !icon.current?.contains(e.target as Node) &&
@@ -39,21 +44,54 @@ export default function Profile({ user }: { user?: any }) {
           )}
         >
           <div className="mb-5 mt-1">
-            <h1 className="font-semibold">{user?.name ?? "User"}</h1>
+            <h1 className="font-semibold text-xl">
+              {user?.firstName ?? "User"}
+            </h1>
             <p className="text-neutral-600">{user?.email ?? "Not signed in"}</p>
           </div>
           <Link
-            to={"/auth/login"}
-            className="p-2 my-1 bg-black text-white rounded-md px-3 text-center cursor-pointer"
+            to={user ? "/dashboard" : "/auth/login"}
+            className={clsx(
+              "p-2 my-1 bg-black text-white rounded-md px-3 text-center cursor-pointer",
+              user && user.role !== "ADMIN" && "hidden"
+            )}
           >
-            Sign In
+            {user ? "Dashboard" : "Sign In"}
           </Link>
-          <Link
-            to={"/auth/register"}
-            className="p-2 my-1 rounded-md px-3 text-center border border-slate-200 cursor-pointer"
-          >
-            Sign Up
-          </Link>
+
+          {user ? (
+            <span
+              onClick={() => {
+                authHandler({
+                  type: "logout",
+                  data: {},
+                  options: {
+                    headers: {
+                      Authorization: user.login_tokens,
+                    },
+                  },
+                })
+                  .then((res) => {
+                    navigate("/auth/login");
+                    deleteSession();
+                    toast.success(res.data.message, { duration: 1000 });
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              }}
+              className="p-2 my-1 rounded-md px-3 text-center border border-slate-200 cursor-pointer"
+            >
+              Log Out
+            </span>
+          ) : (
+            <Link
+              to={"/auth/register"}
+              className="p-2 my-1 rounded-md px-3 text-center border border-slate-200 cursor-pointer"
+            >
+              Sign Up
+            </Link>
+          )}
         </div>
       </div>
     </>

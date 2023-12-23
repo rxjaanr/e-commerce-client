@@ -3,12 +3,17 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Input from "../../components/forms/input/input";
 import Button from "../../components/ui/button/button";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { authHandler } from "../../utils/requests/auth/auth";
+import { toast } from "sonner";
+import useSession from "../../utils/hooks/useSession";
 
 export default function AuthPage() {
   const { type } = useParams();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [validation, setValidation] = useState<any>({});
+  const setSession = useSession((state) => state.setSession);
+  const navigate = useNavigate();
   interface iData {
     firstName: string;
     lastName: string;
@@ -58,8 +63,8 @@ export default function AuthPage() {
         onClick={() => {
           setTimeout(() => {
             setData({});
-            setValidation({});
           }, 1000);
+          setValidation({});
         }}
         className="absolute p-6 md:p-8 right-0"
         to={type === "login" ? "/auth/register" : "/auth/login"}
@@ -98,6 +103,35 @@ export default function AuthPage() {
             onSubmit={(e) => {
               e.preventDefault();
               setIsLoading(true);
+              authHandler({ type: type as string, data: data, options: {} })
+                .then((res) => {
+                  if (type === "register") {
+                    toast.success(res.data.message);
+                    setTimeout(() => {
+                      setData({});
+                      toast.loading("Navigating To Login Page", {
+                        onAutoClose: () => {
+                          navigate("/auth/login");
+                        },
+                        duration: 1000,
+                      });
+                    }, 1500);
+                    setValidation({});
+                  } else {
+                    setSession(res.data);
+                    navigate(-1);
+                  }
+                })
+                .catch((err) => {
+                  if (err && err.response) {
+                    if (type === "register") {
+                      setValidation(err.response.data.error);
+                    } else {
+                      toast.error(err.response?.data?.error.message);
+                    }
+                  }
+                })
+                .finally(() => setIsLoading(false));
             }}
             className="flex flex-col mt-8 w-full gap-2"
           >

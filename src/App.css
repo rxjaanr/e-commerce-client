@@ -30,12 +30,26 @@
   font-weight: 500;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url(./assets/fonts/Inter/Inter-SemiBold.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 600;
+}
+
 /* Bold */
 @font-face {
   font-family: "Inter";
   src: url(./assets/fonts/Inter/Inter-Bold.ttf) format("truetype");
   font-style: normal;
   font-weight: 700;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url(./assets/fonts/Inter/Inter-ExtraBold.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 800;
 }
 
 /* Black */

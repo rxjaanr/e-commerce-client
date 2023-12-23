@@ -6,8 +6,9 @@ import clsx from "clsx";
 import Search from "../../ui/search/search";
 import Profile from "../../ui/profile/profile";
 import Dropdown from "../../ui/dropdown/dropdown";
+import { UserType } from "../../../utils/types/type";
 
-export default function Navbar({ user }: { user?: {} }) {
+export default function Navbar({ user }: { user: UserType | null }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -46,7 +47,7 @@ export default function Navbar({ user }: { user?: {} }) {
           {/* Search Box, Cart , And Auth */}
           <div className="flex gap-3 px-2 items-center">
             <Search />
-            <Profile />
+            <Profile user={user} />
           </div>
           {/*  */}
         </div>

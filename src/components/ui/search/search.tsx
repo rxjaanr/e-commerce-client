@@ -58,11 +58,9 @@ export default function Search() {
           Search...
         </h1>
         <div className="flex text-[0.8rem] mx-2 max-lg:hidden font-semibold text-neutral-500">
-          <span className="p-1 px-2 bg-slate-300 rounded-md shadow-md">
-            CTRL
-          </span>
+          <span className="p-1 px-2 bg-slate-200 rounded shadow">CTRL</span>
           <span className="p-1">+</span>
-          <span className="p-1 px-2 bg-slate-300 rounded-md shadow-md">K</span>
+          <span className="p-1 px-2 bg-slate-200 rounded shadow">K</span>
         </div>
       </div>
     </>
