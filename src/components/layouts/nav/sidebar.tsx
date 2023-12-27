@@ -9,16 +9,12 @@ export const navList = [
     route: [
       {
         name: "Products",
-        link: "/products",
+        link: "#products",
       },
       {
-        name: "New Arrivals",
-        link: "#new-arrivals",
+        name: "Categories",
+        link: "#categories",
         icon: <ArrowUpRightIcon className="w-[0.70rem]" />,
-      },
-      {
-        name: "Brands",
-        link: "#new-arrivals",
       },
     ],
   },
@@ -57,9 +53,9 @@ export default function Sidebar(props: {
       )}
     >
       <div className="flex w-full justify-between items-center">
-        <h1 className="font-bold text-[1.15rem] uppercase">rjstore.co</h1>
+        <h1 className="font-bold text-[1.15rem] uppercase">rjstore</h1>
         <XMarkIcon
-          className="w-8 cursor-pointer hover:bg-slate-100 rounded-full p-2"
+          className="w-8 cursor-pointer hover:bg-slate-100 rounded-full p-2 translate-x-2"
           onClick={props.onClose}
         />
       </div>

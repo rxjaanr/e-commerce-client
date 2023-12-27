@@ -1,4 +1,5 @@
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 import { ReactNode, useState } from "react";
 
 type PropsType = {
@@ -8,6 +9,7 @@ type PropsType = {
   value?: string | number;
   placeholder?: string;
   children?: ReactNode;
+  className?: string;
 };
 
 export default function Input({
@@ -17,6 +19,7 @@ export default function Input({
   value,
   placeholder,
   children,
+  className,
 }: PropsType) {
   const [hiddenPassword, setHiddenPassword] = useState(true);
 
@@ -27,7 +30,7 @@ export default function Input({
 
   return (
     <>
-      <div className="flex flex-col relative">
+      <div className={clsx("flex flex-col relative", className)}>
         <label className="capitalize">{label}</label>
         <input
           className="p-2 px-4 border border-slate-300 focus:outline-none rounded-sm mt-1"

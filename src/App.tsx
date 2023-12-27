@@ -7,13 +7,17 @@ import AuthPage from "./pages/auth";
 import GuestRoute from "./components/route/guest.route";
 import Dashboard from "./pages/dashboard";
 import DashboardLayout from "./pages/dashboard/layout";
+import Users from "./pages/dashboard/users";
+import Products from "./pages/dashboard/products";
+import Orders from "./pages/dashboard/orders";
+import NewProduct from "./pages/dashboard/products/new";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Main */}
         <Route element={<RootLayout />}>
+          {/* Main */}
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
           </Route>
@@ -27,13 +31,20 @@ function App() {
               </GuestRoute>
             }
           />
+          {/* End Auth */}
+          {/* Dashboard */}
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            {/* Users Management */}
+            <Route path="/dashboard/users" element={<Users />} />
+            {/* Product Management */}
+            <Route path="/dashboard/products" element={<Products />} />
+            <Route path="/dashboard/products/new" element={<NewProduct />} />
+            {/* Orders */}
+            <Route path="/dashboard/orders" element={<Orders />} />
+          </Route>
+          {/* End Dashboard */}
         </Route>
-        {/* End Auth */}
-        {/* Dashboard */}
-        <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
-        {/* End Dashboard */}
       </Routes>
     </BrowserRouter>
   );

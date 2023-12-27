@@ -50,17 +50,19 @@ export default function Search() {
       <div
         onClick={() => setIsOpen(true)}
         className={clsx(
-          "rounded-full flex items-center border border-slate-300 p-2 cursor-pointer hover:bg-slate-50"
+          "rounded-full flex items-center border border-slate-300 p-2 md:pl-3 cursor-pointer hover:bg-slate-50"
         )}
       >
         <MagnifyingGlassIcon className="w-6" />
-        <h1 className="text-neutral-600 max-md:hidden mx-2 text-[0.9rem] mr-3">
+        <h1 className="text-neutral-500 max-md:hidden mx-2 mr-4 text-[0.9rem]">
           Search...
         </h1>
         <div className="flex text-[0.8rem] mx-2 max-lg:hidden font-semibold text-neutral-500">
-          <span className="p-1 px-2 bg-slate-200 rounded shadow">CTRL</span>
+          <span className="p-1 px-2 bg-slate-100 rounded-sm shadow-sm">
+            CTRL
+          </span>
           <span className="p-1">+</span>
-          <span className="p-1 px-2 bg-slate-200 rounded shadow">K</span>
+          <span className="p-1 px-2 bg-slate-100 rounded-sm shadow-sm">K</span>
         </div>
       </div>
     </>

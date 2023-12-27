@@ -125,9 +125,13 @@ export default function AuthPage() {
                 .catch((err) => {
                   if (err && err.response) {
                     if (type === "register") {
-                      setValidation(err.response.data.error);
+                      if (err.response.status === 422) {
+                        setValidation(err.response.data.error);
+                      }
                     } else {
-                      toast.error(err.response?.data?.error.message);
+                      if (err.response.status === 401) {
+                        toast.error(err.response?.data?.error.message);
+                      }
                     }
                   }
                 })
