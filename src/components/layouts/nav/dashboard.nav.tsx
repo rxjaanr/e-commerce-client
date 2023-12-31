@@ -44,7 +44,7 @@ export default function DashboardNav() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 flex justify-between items-center border border-slate-200 md:px-8 px-6 py-4 bg-white">
+      <div className="fixed top-0 left-0 right-0 flex justify-between items-center border border-slate-200 md:px-8 px-6 py-4 bg-white z-[999]">
         <span className="font-medium text-base text-neutral-800 !leading-6 flex gap-1">
           <span className="text-neutral-600">Hi, </span>
           {user.firstName}

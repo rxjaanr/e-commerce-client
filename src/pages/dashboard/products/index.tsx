@@ -1,5 +1,6 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import ListProduct from "../../../components/ui/products/list_product";
 
 export default function Products() {
   return (
@@ -13,6 +14,9 @@ export default function Products() {
           <PlusIcon className="w-4" />
           Add Products
         </Link>
+      </div>
+      <div className="mt-8">
+        <ListProduct />
       </div>
     </main>
   );

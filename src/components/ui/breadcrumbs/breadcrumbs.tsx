@@ -8,7 +8,7 @@ export default function BreadCrumbs({ className }: { className?: string }) {
   return (
     <div className={className}>
       {path.map((list, i) => {
-        const link = path.filter((p, index) => index <= i).join("/");
+        const link = path.filter((_, index) => index <= i).join("/");
         return (
           <span
             className={clsx(
@@ -17,7 +17,7 @@ export default function BreadCrumbs({ className }: { className?: string }) {
             )}
             key={i}
           >
-            <Link to={link}>{list}</Link>
+            <Link to={link}>{list.replace(/-/g, " ")}</Link>
             {i !== path.length - 1 && <ChevronRightIcon className="w-4" />}
           </span>
         );

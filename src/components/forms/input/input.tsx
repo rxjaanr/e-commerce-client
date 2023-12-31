@@ -4,12 +4,13 @@ import { ReactNode, useState } from "react";
 
 type PropsType = {
   label?: string;
-  type?: "text" | "password" | "email";
-  onChange?: any;
+  type?: "text" | "password" | "email" | "number";
+  onChange?: (e: any) => void;
   value?: string | number;
   placeholder?: string;
   children?: ReactNode;
   className?: string;
+  onKeyPress?: (e: any) => void;
 };
 
 export default function Input({
@@ -19,6 +20,7 @@ export default function Input({
   value,
   placeholder,
   children,
+  onKeyPress,
   className,
 }: PropsType) {
   const [hiddenPassword, setHiddenPassword] = useState(true);
@@ -37,6 +39,7 @@ export default function Input({
           type={
             type === "password" && !hiddenPassword ? "text" : type ?? "text"
           }
+          onKeyPress={onKeyPress}
           onChange={onChange}
           value={value}
           placeholder={placeholder}

@@ -11,7 +11,7 @@ export default function DashboardLayout() {
     <>
       <DashboardNav />
       <BreadCrumbs className="pt-[5.5rem] md:pl-60 lg:pl-64 flex gap-1 capitalize max-md:hidden" />
-      <main className="py-28 md:pt-8 md:pl-64 lg:pl-[17rem] px-6 md:px-8 ">
+      <main className="py-28 !pb-44 md:pt-8 md:pl-[15.5rem] lg:!pl-[17rem] px-6 md:px-8 xl:px-12">
         <Outlet />
       </main>
     </>

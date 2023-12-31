@@ -19,6 +19,7 @@ export default function Dropdown({
             items?.map((item, i) => {
               return (
                 <Link
+                  reloadDocument={title === "Discover"}
                   key={i}
                   className="text-neutral-700 flex items-center hover:text-black py-[0.35rem]"
                   to={item.link}

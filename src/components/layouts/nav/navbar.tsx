@@ -7,6 +7,7 @@ import Search from "../../ui/search/search";
 import Profile from "../../ui/profile/profile";
 import Dropdown from "../../ui/dropdown/dropdown";
 import { UserType } from "../../../utils/types/type";
+import { Link } from "react-router-dom";
 
 export default function Navbar({ user }: { user: UserType | null }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -33,7 +34,9 @@ export default function Navbar({ user }: { user: UserType | null }) {
             }}
           />
           <div className="flex items-center max-lg:hidden">
-            <h1 className=" font-bold uppercase py-2">rjstore.co</h1>
+            <Link to={"/"} className=" font-bold uppercase py-2">
+              rjstore
+            </Link>
             {/* Desktop Nav */}
             <div className="flex ml-12 ">
               {navList.map((list, i) => {

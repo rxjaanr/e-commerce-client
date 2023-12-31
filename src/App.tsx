@@ -11,6 +11,9 @@ import Users from "./pages/dashboard/users";
 import Products from "./pages/dashboard/products";
 import Orders from "./pages/dashboard/orders";
 import NewProduct from "./pages/dashboard/products/new";
+import EditProduct from "./pages/dashboard/products/[edit]";
+import ProductsCategory from "./pages/main/products/[categories]";
+import ProductDetail from "./pages/main/products/[categories]/[slug]";
 
 function App() {
   return (
@@ -20,6 +23,12 @@ function App() {
           {/* Main */}
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:category/" element={<ProductsCategory />} />
+            <Route
+              path="/products/:category/:slug"
+              element={<ProductDetail />}
+            />
           </Route>
           {/* End Main */}
           {/* Auth */}
@@ -39,6 +48,7 @@ function App() {
             <Route path="/dashboard/users" element={<Users />} />
             {/* Product Management */}
             <Route path="/dashboard/products" element={<Products />} />
+            <Route path="/dashboard/products/:slug" element={<EditProduct />} />
             <Route path="/dashboard/products/new" element={<NewProduct />} />
             {/* Orders */}
             <Route path="/dashboard/orders" element={<Orders />} />

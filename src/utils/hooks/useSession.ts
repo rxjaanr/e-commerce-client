@@ -10,6 +10,7 @@ interface sessionState {
 }
 
 const defaultValue = {
+  _id: "",
   firstName: "",
   lastName: "",
   email: "",
@@ -20,7 +21,7 @@ const defaultValue = {
 const useSession = create<sessionState>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set) => ({
         isAuthenticated: false,
         user: defaultValue,
         setSession: (newData) =>

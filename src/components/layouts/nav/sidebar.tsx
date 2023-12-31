@@ -8,12 +8,12 @@ export const navList = [
     title: "Discover",
     route: [
       {
-        name: "Products",
-        link: "#products",
+        name: "Hot Sales",
+        link: "/#hot-sales",
       },
       {
         name: "Categories",
-        link: "#categories",
+        link: "/#categories",
         icon: <ArrowUpRightIcon className="w-[0.70rem]" />,
       },
     ],
@@ -23,19 +23,15 @@ export const navList = [
     route: [
       {
         name: "Handphone",
-        link: "#",
+        link: "/products/handphone",
       },
       {
         name: "Laptop",
-        link: "#",
+        link: "/products/laptop",
       },
       {
-        name: "Hardware",
-        link: "#",
-      },
-      {
-        name: "Keyboard",
-        link: "#",
+        name: "Accessories",
+        link: "/products/accessories",
       },
     ],
   },
@@ -74,6 +70,7 @@ export default function Sidebar(props: {
                   {list.route.map((route, i) => {
                     return (
                       <Link
+                        reloadDocument={list.title === "Discover"}
                         key={i}
                         to={route.link}
                         className="py-1 hover:!text-black"

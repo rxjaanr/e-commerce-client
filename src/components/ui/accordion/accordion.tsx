@@ -23,8 +23,9 @@ export default function Accordion({
   const [isOpen, setIsOpen] = useState(opened);
   return (
     <>
-      <div className="w-full group relative" onClick={() => setIsOpen(!isOpen)}>
+      <div className="w-full group relative">
         <div
+          onClick={() => setIsOpen(!isOpen)}
           className={clsx(
             "flex w-full justify-between items-center cursor-pointer",
             className

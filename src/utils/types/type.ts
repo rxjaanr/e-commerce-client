@@ -1,4 +1,5 @@
 export type UserType = {
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -9,9 +10,16 @@ export type UserType = {
 export type ProductType = {
   name: string;
   slug: string;
-  desciption: string;
+  description: string;
   category: string;
   price: number;
   qty: number;
-  image: { url: string; imageId: string }[];
+  images: { url: string; imageId: string }[];
+  discount: number;
 };
+
+export interface iProducts extends ProductType {
+  _id: string;
+  likedBy: [];
+  discount: number;
+}

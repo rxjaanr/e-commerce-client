@@ -77,7 +77,7 @@ export default function AuthPage() {
       >
         Back to Homepage <ArrowRightIcon className="w-4 md:w-5" />
       </Link>
-      <div className="md:w-2/5 lg:w-1/2 h-full hidden bg-[#DEF5E5] md:flex p-5 md:p-8">
+      <div className="md:w-2/5 lg:w-1/2 h-full hidden bg-purple-300 md:flex p-5 md:p-8">
         <p className="text-neutral-800 mt-auto">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque quam
           nisi illum illo voluptatem beatae commodi reiciendis dolores aliquid?
@@ -118,7 +118,7 @@ export default function AuthPage() {
                     }, 1500);
                     setValidation({});
                   } else {
-                    setSession(res.data);
+                    setSession(res.data.result);
                     navigate(-1);
                   }
                 })
@@ -170,7 +170,7 @@ export default function AuthPage() {
               })}
             <Button
               disabled={isLoading}
-              className="mt-6 bg-[#DEF5E5] shadow py-3 disabled:bg-neutral-100 disabled:pointer-events-none"
+              className="mt-6 bg-purple-500 text-white shadow py-3 disabled:bg-neutral-100 disabled:pointer-events-none"
               type="submit"
             >
               {isLoading ? "..." : type === "login" ? "Sign In" : "Sign Up"}
