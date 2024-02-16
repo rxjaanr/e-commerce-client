@@ -20,7 +20,7 @@ const defaultValue = {
 const useSession = create<sessionState>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set) => ({
         user: defaultValue,
         setSession: (newData: UserType) => set(() => ({ user: newData })),
         deleteSession: () => set(() => ({ user: defaultValue })),

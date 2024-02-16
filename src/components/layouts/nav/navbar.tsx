@@ -1,4 +1,4 @@
-import { Bars3Icon, ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar, { navList } from "./sidebar";
 import { useState } from "react";
 

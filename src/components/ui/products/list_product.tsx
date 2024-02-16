@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../../utils/requests/products/product";
 import { useEffect, useState } from "react";
 import { iProducts } from "../../../utils/types/type";
