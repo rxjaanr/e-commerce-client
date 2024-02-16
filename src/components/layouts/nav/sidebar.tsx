@@ -16,22 +16,30 @@ export const navList = [
         link: "/#categories",
         icon: <ArrowUpRightIcon className="w-[0.70rem]" />,
       },
+      {
+        name: "Products",
+        link: "/products",
+      },
     ],
   },
   {
     title: "Categories",
     route: [
       {
-        name: "Handphone",
-        link: "/products/handphone",
+        name: "Gadget",
+        link: "/products?categories=gadget",
       },
       {
-        name: "Laptop",
-        link: "/products/laptop",
+        name: "Gaming",
+        link: "/products?categories=gaming",
       },
       {
         name: "Accessories",
-        link: "/products/accessories",
+        link: "/products?categories=accessories",
+      },
+      {
+        name: "Fashion",
+        link: "/products?categories=fashion",
       },
     ],
   },
@@ -44,7 +52,7 @@ export default function Sidebar(props: {
   return (
     <div
       className={clsx(
-        "fixed lg:hidden top-0 bottom-0 left-0 bg-white py-8 px-6 w-72 shadow-[rgba(0,0,15,0.1)_2px_0px_2px_0px] transition-all duration-300 ease-in-out z-[3]",
+        "fixed lg:hidden top-0 bottom-0 left-0 bg-white py-8 px-6 w-72 shadow-[rgba(0,0,15,0.1)_2px_0px_2px_0px] transition-all duration-300 ease-in-out z-[998]",
         !props.isOpen && "-translate-x-full"
       )}
     >
@@ -70,7 +78,9 @@ export default function Sidebar(props: {
                   {list.route.map((route, i) => {
                     return (
                       <Link
-                        reloadDocument={list.title === "Discover"}
+                        reloadDocument={
+                          list.title === "Discover" && route.link.includes("#")
+                        }
                         key={i}
                         to={route.link}
                         className="py-1 hover:!text-black"

@@ -51,16 +51,16 @@ export default function NewProduct() {
       setloading(false);
       return toast.error("Image is required");
     }
-    createProduct({ data: productData, token: user.login_tokens })
+    createProduct({ data: productData, token: user.token })
       .then(async (res) => {
         const imageRes = await uploadImage({
           data: formData,
-          token: user.login_tokens,
+          token: user.token,
         });
         updateProduct({
           slug: res.data.result.slug,
           data: { images: imageRes.data.data },
-          token: user.login_tokens,
+          token: user.token,
         })
           .then((result) => {
             console.log(result);
@@ -178,8 +178,9 @@ export default function NewProduct() {
             value={productData.category}
           >
             <option disabled>Categories</option>
-            <option value="laptop">Laptop</option>
-            <option value="handphone">Handphone</option>
+            <option value="gadget">Gadget</option>
+            <option value="gaming">Gaming</option>
+            <option value="fashion">Fashion</option>
             <option value="accessories">Accessories</option>
           </select>
           <div className="flex gap-1 justify-between ">
@@ -189,7 +190,7 @@ export default function NewProduct() {
                 validations.errors && validations.errors["name"] && "lg:mt-5"
               )}
               onKeyPress={preventNonNumberInput}
-              placeholder="Price ($)"
+              placeholder="Price (Rp)"
               value={productData.price || ""}
               onChange={(e) => {
                 setProductData((data) => ({

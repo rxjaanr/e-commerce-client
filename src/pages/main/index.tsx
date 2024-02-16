@@ -9,23 +9,27 @@ import macbookImg from "/images/macbook.jpg";
 import useSession from "../../utils/hooks/useSession";
 
 export default function Home() {
-  const { user, isAuthenticated } = useSession();
-  const useHotSalesQuery = () => {
-    return useQuery({
-      queryKey: ["hot-sales"],
-      queryFn: async () => {
-        const response = await getProducts();
-        return response.data.result.slice(0, 4);
-      },
-    });
-  };
+  const { user } = useSession();
+  const useHotSalesQuery = useQuery({
+    queryKey: ["hot-sales"],
+    queryFn: async () => {
+      const response = await getProducts({
+        params: {
+          discount: {
+            $gt: 0,
+          },
+        },
+      });
+      return response.data.result.slice(0, 4);
+    },
+  });
 
-  const { isLoading, data } = useHotSalesQuery();
+  const { isLoading, data } = useHotSalesQuery;
   const { hash } = useLocation();
 
   useEffect(() => {
     if (!isLoading && hash) {
-      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+      document.querySelector(hash)?.scrollIntoView();
     }
   }, [isLoading, hash]);
 
@@ -36,7 +40,7 @@ export default function Home() {
   return (
     <main className="py-8 px-4 md:px-8">
       <div className="flex flex-wrap max-md:justify-center py-4 md:py-8 md:mt-12 lg:mt-6 xl:mt-4 lg:px-4 xl:px-8 mb-28">
-        <div className="mt-8  md:flex md:flex-col md:items-start lg:mt-0 md:justify-center max-md:text-center md:w-2/3 lg:w-1/2 px-4 lg:px-4 xl:pl-8">
+        <div className="mt-8  md:flex md:flex-col md:items-start lg:mt-0 md:justify-center max-md:text-center md:w-2/3 lg:w-1/2  xl:pl-8">
           <h1 className="text-4xl md:text-[2.65rem] lg:text-5xl font-semibold max-md:lowercase">
             We have some{" "}
           </h1>
@@ -44,7 +48,7 @@ export default function Home() {
             <span className="!font-bold text-purple-600"> cool things</span> for
             you
           </h1>
-          <p className="text-neutral-600 mt-2 sm:max-md:px-6 md:pr-8 lg:text-xl">
+          <p className="text-neutral-600 mt-2 max-sm:px-6 sm:max-md:px-6 md:pr-8 lg:text-xl">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem,
             pariatur! Nemo, ad!
           </p>
@@ -68,7 +72,7 @@ export default function Home() {
         <div className="text-center">
           <h1 className="text-3xl font-semibold">Hot Sales</h1>
         </div>
-        <div className="flex flex-wrap sm:max-md:gap-4 lg:gap-2 pt-16 justify-center">
+        <div className="flex flex-wrap gap-3 sm:gap-4 lg:gap-4 xl:gap-6 pt-16 justify-center">
           {data?.length > 0 &&
             data.map((product: iProducts, i: number) => {
               return (
@@ -77,7 +81,7 @@ export default function Home() {
                   key={i}
                   index={i}
                   product={product}
-                  user={isAuthenticated ? user : null}
+                  user={user.token !== "" ? user : null}
                 />
               );
             })}

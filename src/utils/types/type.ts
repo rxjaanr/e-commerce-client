@@ -4,7 +4,7 @@ export type UserType = {
   lastName: string;
   email: string;
   role: string;
-  login_tokens: string;
+  token: string;
 };
 
 export type ProductType = {
@@ -19,6 +19,7 @@ export type ProductType = {
 };
 
 export interface iProducts extends ProductType {
+  _v: number;
   _id: string;
   likedBy: [];
   discount: number;

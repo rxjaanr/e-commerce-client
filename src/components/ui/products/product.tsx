@@ -7,7 +7,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProduct } from "../../../utils/requests/products/product";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+
+export const discountedPrice = (
+  initialPrice: number,
+  discountPrecentage: number
+) => {
+  const discountAmount = (initialPrice * discountPrecentage) / 100;
+  const result = initialPrice - discountAmount;
+  return result;
+};
 
 export default function Product({
   product,
@@ -18,7 +26,7 @@ export default function Product({
   product: iProducts;
   user: UserType | any;
   index?: number;
-  queryKey: string[];
+  queryKey: string[] | any;
 }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -31,15 +39,6 @@ export default function Product({
     setLiked(product.likedBy.some((val) => val === user?._id));
   }, [product]);
 
-  const discountedPrice = (
-    initialPrice: number,
-    discountPrecentage: number
-  ) => {
-    const discountAmount = (initialPrice * discountPrecentage) / 100;
-    const result = initialPrice - discountAmount;
-    return result;
-  };
-
   const handleLikeProduct = async () => {
     const response = await updateProduct({
       slug: product.slug,
@@ -50,7 +49,7 @@ export default function Product({
         : {
             $pull: { likedBy: user._id },
           },
-      token: user.login_tokens,
+      token: user.token,
     });
     return response.data.result;
   };
@@ -66,19 +65,15 @@ export default function Product({
         return newProducts;
       }
     });
-    data.likedBy.some((val) => val === user._id)
+    data.likedBy.some((val) => val === user?._id)
       ? toast.success("Added To Liked Products")
       : toast.info("Product Removed from Liked Products");
   };
 
-  const useLikeMutate = () => {
-    return useMutation({
-      mutationFn: user
-        ? handleLikeProduct
-        : () => navigate("/auth/login") as any,
-      onSuccess: user ? handleSuccessLike : () => {},
-    });
-  };
+  const useLikeMutate = useMutation({
+    mutationFn: user ? handleLikeProduct : () => navigate("/auth/login") as any,
+    onSuccess: user ? handleSuccessLike : () => {},
+  });
 
   const convertedCurrency = (price: number) => {
     return price
@@ -89,12 +84,12 @@ export default function Product({
       .split(",")[0];
   };
 
-  const { mutate: mutateLike } = useLikeMutate();
+  const { mutate: mutateLike } = useLikeMutate;
 
   return (
     <Link
-      to={`/products/${product.category}/${product.slug}`}
-      className="px-2 py-2 w-1/2 sm:w-2/5 md:w-1/4 lg:w-1/5"
+      to={`/products/${product.slug}`}
+      className=" w-[48%] sm:w-[31.5%] md:w-[24%] lg:w-[18.5%] xl:w-1/6"
     >
       <div className="flex flex-col justify-between h-full border border-slate-200 py-2 px-3 rounded-md hover:shadow-md transition-all duration-300 ease-in-out">
         <div className="flex flex-col">
@@ -135,13 +130,12 @@ export default function Product({
         <div className="flex justify-between mt-4 ">
           <img
             src={liked ? heartFilled : heart}
-            className="w-6 sm:max-md:w-7 py-2 px-1"
+            className="w-7 sm:max-md:w-7 py-2 px-1"
             onClick={(e) => {
               e.preventDefault();
               mutateLike();
             }}
           />
-          <ShoppingCartIcon className="w-9 m-1 p-2 bg-black text-white rounded-full" />
         </div>
       </div>
     </Link>

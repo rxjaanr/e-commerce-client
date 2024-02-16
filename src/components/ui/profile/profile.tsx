@@ -85,7 +85,7 @@ export default function Profile({ user }: { user: UserType | any }) {
                     data: {},
                     options: {
                       headers: {
-                        Authorization: user.login_tokens,
+                        Authorization: user.token,
                       },
                     },
                   })

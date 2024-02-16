@@ -4,7 +4,6 @@ import { UserType } from "../types/type";
 
 interface sessionState {
   user: UserType;
-  isAuthenticated: boolean;
   setSession: (user: UserType) => void;
   deleteSession: () => void;
 }
@@ -15,19 +14,16 @@ const defaultValue = {
   lastName: "",
   email: "",
   role: "",
-  login_tokens: "",
+  token: "",
 };
 
 const useSession = create<sessionState>()(
   devtools(
     persist(
-      (set) => ({
-        isAuthenticated: false,
+      (set, get) => ({
         user: defaultValue,
-        setSession: (newData) =>
-          set(() => ({ user: newData, isAuthenticated: true })),
-        deleteSession: () =>
-          set(() => ({ user: defaultValue, isAuthenticated: false })),
+        setSession: (newData: UserType) => set(() => ({ user: newData })),
+        deleteSession: () => set(() => ({ user: defaultValue })),
       }),
       {
         name: "session-store",

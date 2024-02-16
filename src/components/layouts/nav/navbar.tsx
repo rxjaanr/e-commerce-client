@@ -1,4 +1,4 @@
-import { Bars3Icon } from "@heroicons/react/24/outline";
+import { Bars3Icon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Sidebar, { navList } from "./sidebar";
 import { useState } from "react";
 
@@ -17,7 +17,7 @@ export default function Navbar({ user }: { user: UserType | null }) {
       {/* layer */}
       <div
         className={clsx(
-          "lg:hidden fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.2)] z-[2]",
+          "lg:hidden fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.2)] z-[997]",
           !isOpen && "hidden"
         )}
         onClick={() => setIsOpen(false)}
@@ -25,7 +25,7 @@ export default function Navbar({ user }: { user: UserType | null }) {
       {/* Mobile Nav */}
       <Sidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
       {/* End Mobile Nav */}
-      <nav className="fixed z-[1] flex justify-between top-0 right-0 left-0 px-4 md:px-8 lg:px-12 py-3 md:py-4 bg-white border-b border-b-slate-300">
+      <nav className="fixed z-[996] flex justify-between top-0 right-0 left-0 px-4 md:px-8 lg:px-12 py-3 md:py-4 bg-white border-b border-b-slate-300">
         <div className="flex flex-grow justify-between items-center">
           <Bars3Icon
             className="w-12 lg:hidden cursor-pointer hover:bg-slate-100 rounded-full p-2"

@@ -6,6 +6,10 @@ export const getProducts = async (option?: AxiosRequestConfig) => {
   return API.get("/product", option ?? {});
 };
 
+export const getProduct = async (slug: string) => {
+  return API.get("/product/" + slug);
+};
+
 export const createProduct = async ({
   data,
   token,

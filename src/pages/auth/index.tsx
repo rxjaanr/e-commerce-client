@@ -170,7 +170,7 @@ export default function AuthPage() {
               })}
             <Button
               disabled={isLoading}
-              className="mt-6 bg-purple-500 text-white shadow py-3 disabled:bg-neutral-100 disabled:pointer-events-none"
+              className="mt-16 bg-purple-500 text-white shadow py-3 disabled:bg-neutral-100 disabled:pointer-events-none"
               type="submit"
             >
               {isLoading ? "..." : type === "login" ? "Sign In" : "Sign Up"}
