@@ -27,19 +27,19 @@ export const navList = [
     route: [
       {
         name: "Gadget",
-        link: "/products?categories=gadget",
+        link: "/products?category=gadget",
       },
       {
         name: "Gaming",
-        link: "/products?categories=gaming",
+        link: "/products?category=gaming",
       },
       {
         name: "Accessories",
-        link: "/products?categories=accessories",
+        link: "/products?category=accessories",
       },
       {
         name: "Fashion",
-        link: "/products?categories=fashion",
+        link: "/products?category=fashion",
       },
     ],
   },

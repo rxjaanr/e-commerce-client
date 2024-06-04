@@ -4,5 +4,5 @@ import { Navigate } from "react-router-dom";
 
 export default function GuestRoute({ children }: { children: ReactNode }) {
   const { user } = useSession();
-  return user.token == "" ? <Navigate to={"/"} /> : children;
+  return user.token !== "" ? <Navigate to={"/"} /> : children;
 }

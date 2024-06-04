@@ -1,16 +1,21 @@
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar, { navList } from "./sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import clsx from "clsx";
 import Search from "../../ui/search/search";
 import Profile from "../../ui/profile/profile";
 import Dropdown from "../../ui/dropdown/dropdown";
 import { UserType } from "../../../utils/types/type";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar({ user }: { user: UserType | null }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { pathname, search } = useLocation();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname, search]);
 
   return (
     <>
